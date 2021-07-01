@@ -1,0 +1,69 @@
+p(v wins)
+v lowest: v/(1-u'v'w')
+v highest (including joint highest): u'w'/(1-u'v'w')
+v joint lowest: vu'/(1-u'v'w')
+v middle: vw'
+
+
+w strategy:
+use numerical methods calling v strategy to find best value
+
+v strategy:
+use numerical methods calling u strategy to find best value
+
+u strategy:
+
+if going higher than w and v then go as close to 1 as possible
+
+if going below w and v then go as close to the smaller one as possible
+
+if going between w and v then go as close to the higher one as possible
+
+pstrat1 = v'w'
+pstrat2 = min(w,v)/(1-v'w'(1-min(w,v))
+pstrat3 = max(w,v)(1-min(w,v))/(1-u'v'w')
+
+if pstrat1>pstrat2 && pstrat1>pstrat3 return 1
+elseif pstrat2 > pstrat3 return min(w,v)
+else return max(w,v)
+
+---
+
+function r1 (n)
+	(nlbound,nubound) = (0.27,0.29)
+	loop n times: (nlbound,nubound) = r1-accuracy(nlbound,nubound)
+	return (nlbound+nubound)/2
+
+function r1-accuracy(lbound, ubound, n)
+	w1 = lbound+0.33*(ubound-lbound)
+	v1 = r2(w1, n)
+	u1 = r3(w1, v1)
+	cut1 = rwc(w1,v1,u1,1)
+	w2 = lbound+0.66*(ubound-lbound)
+	v2 = r2(w2, n)
+	u2 = r3(w2, v1)
+	cut2 = rwc(w2,v2,u2,1)
+	if cut1>cut2 return lbound, cut2
+	else return cut1, ubound
+
+function r2 (w, n)
+	iterate r2-accuracy n-times with initial lbound 0.3 and ubound 0.5
+	return average of new bounds
+
+function r2-accuracy (w, lbound, ubound)
+	v1=lbound+0.33*(ubound-lbound)
+	u1=r3(w,v1)
+	cut1 = rwc(w, v1, u1, 2)
+	v2=lbound+0.66*(ubound-lbound)
+	u2=r3(w,v2)
+	cut2 = rwc(w, v2, u2, 2)
+	if cut1>cut2 return lbound, cut2
+	else return cut1, ubound
+
+function r3 (w, v)
+	if rwc(w,v,1)>rwc(w,v,w) && rwc(w,v,1)>rwc(w,v,v) return 1
+	else if rwc(w,v,w)>rwc(w,v,v) return w
+	else return v
+
+function rwc (w, v, u, r)
+	return rth robot's chance of winning // note, to account for arbitrary closeness, the probabilities may be the same but in the event of a tie the robot with higher seeding wins
