@@ -1,0 +1,67 @@
+<!DOCTYPE html><html>
+
+<head>
+  <title>Knight Moves 4</title>
+  <link rel="shortcut icon" href="https://jdgmiles.github.io/F3M8/favicon.ico">
+  <style>
+  body  {background-color: black; color:white; font-family:arial}
+  table {border: 1px solid white;}
+  .gridcell {width:50px; height:50px; text-align:center; color:black; font-size:32px; font-weight: bold;}
+  </style>
+</head>
+
+<body><center>
+  <table id="layout-table">
+    <tr>
+      <td><table id="grid">
+      </td></table>
+      <td><table id="switches">
+      </td></table>
+    </tr>
+  </table>
+</center></body>
+
+</html>
+
+<script type="text/javascript">
+var rows = 10;
+var cols = 10;
+var values = [];
+for (i = 0; i < ( rows * cols ); i++ ) { values[i] = 0 }
+var colourbank = ["000000", "EEDD66", "EEBBBB", "EEBBBB", "BBDDEE", "EEBBBB", "77DD77", "EEBBBB", "BBDDEE", "EEBBBB", "EEDD66", "EEDD66", "77DD77", "BBDDEE", "EEDD66", "EEDD66", "77DD77", "BBDDEE"]; // note this particular colour set is convoluted to match the colours in the Jane Street puzzle but the code is designed to cycle through whatever is in this set
+var partitions = [1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,3,1,1,1,1,2,1,1,1,1,3,1,1,1,2,2,2,2,4,3,3,3,5,1,2,1,1,6,4,4,4,4,5,1,1,1,6,6,6,7,7,4,5,8,8,9,6,10,10,7,7,11,5,12,8,9,9,13,13,13,7,11,5,12,14,9,15,15,15,16,16,11,12,12,14,17,17,17,17,17,16,11];
+
+values[0]=12;
+values[16]=5;
+values[18]=23;
+values[26]=8;
+values[33]=14;
+values[51]=2;
+values[64]=20;
+values[74]=33;
+values[99]=28;
+
+function buildgrid(){
+  var gridhtml = "";
+  for ( i=0; i<rows; i++ ) {
+    gridhtml = gridhtml + "<tr>";
+    for (j=0; j<cols; j++ ) {
+      gridhtml = gridhtml + "<td class='gridcell' id='c" + ((i*rows)+j) + "'>" + values[((i*rows)+j)] + "</td>";
+    }
+    gridhtml = gridhtml + "</tr>";
+  }
+  document.getElementById('grid').innerHTML = "" + gridhtml;
+}
+
+function colourgrid(){
+  for (i = 0; i < ( rows * cols ); i++ ) {
+    document.getElementById('c'+i).style.backgroundColor = "#" + colourbank[partitions[i]%colourbank.length];
+    if(values[i]==0){document.getElementById('c'+i).style.color = "rgba(0,0,0,0)"}
+    else{document.getElementById('c'+i).style.color = "black"}
+  }
+}
+
+buildgrid();
+colourgrid();
+
+</script>
