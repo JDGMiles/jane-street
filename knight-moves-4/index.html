@@ -14,9 +14,11 @@
   <table id="layout-table">
     <tr>
       <td><table id="grid">
-      </td></table>
+      </table></td>
       <td><table id="switches">
-      </td></table>
+      </table></td>
+      <td><table id="regionsums">
+      </table></td>
     </tr>
   </table>
 </center></body>
@@ -26,11 +28,12 @@
 <script type="text/javascript">
 var rows = 10;
 var cols = 10;
-var values = [];
-for (i = 0; i < ( rows * cols ); i++ ) { values[i] = 0 }
-var colourbank = ["000000", "EEDD66", "EEBBBB", "EEBBBB", "BBDDEE", "EEBBBB", "77DD77", "EEBBBB", "BBDDEE", "EEBBBB", "EEDD66", "EEDD66", "77DD77", "BBDDEE", "EEDD66", "EEDD66", "77DD77", "BBDDEE"]; // note this particular colour set is convoluted to match the colours in the Jane Street puzzle but the code is designed to cycle through whatever is in this set
-var partitions = [1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,3,1,1,1,1,2,1,1,1,1,3,1,1,1,2,2,2,2,4,3,3,3,5,1,2,1,1,6,4,4,4,4,5,1,1,1,6,6,6,7,7,4,5,8,8,9,6,10,10,7,7,11,5,12,8,9,9,13,13,13,7,11,5,12,14,9,15,15,15,16,16,11,12,12,14,17,17,17,17,17,16,11];
+var values = []; // cell values
+for (i = 0; i < ( rows * cols ); i++ ) { values[i] = 0 } // all cells start at 0
+var colourbank = ["000000", "EEDD66", "EEBBBB", "EEBBBB", "BBDDEE", "EEBBBB", "77DD77", "EEBBBB", "BBDDEE", "EEBBBB", "EEDD66", "EEDD66", "77DD77", "BBDDEE", "EEDD66", "EEDD66", "77DD77", "BBDDEE"]; // note: this particular colour set is convoluted to match the colours in the Jane Street problem but the code is designed to cycle through whatever is in this set
+var regions = [1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,3,1,1,1,1,2,1,1,1,1,3,1,1,1,2,2,2,2,4,3,3,3,5,1,2,1,1,6,4,4,4,4,5,1,1,1,6,6,6,7,7,4,5,8,8,9,6,10,10,7,7,11,5,12,8,9,9,13,13,13,7,11,5,12,14,9,15,15,15,16,16,11,12,12,14,17,17,17,17,17,16,11]; // the region assignment of each cell according to the Jane Street problem
 
+// the initial values in the Jane Street problem
 values[0]=12;
 values[16]=5;
 values[18]=23;
@@ -55,9 +58,20 @@ function buildgrid(){
 
 function colourgrid(){
   for (i = 0; i < ( rows * cols ); i++ ) {
-    document.getElementById('c'+i).style.backgroundColor = "#" + colourbank[partitions[i]%colourbank.length];
-    if(values[i]==0){document.getElementById('c'+i).style.color = "rgba(0,0,0,0)"}
+    document.getElementById('c'+i).style.backgroundColor = "#" + colourbank[regions[i]%colourbank.length];
+    if(values[i]==0){document.getElementById('c'+i).style.color = "rgba(0,0,0,0)"} // makes "0" cell values invisible
     else{document.getElementById('c'+i).style.color = "black"}
+  }
+}
+
+function sumregions(){
+  var regioncount = 0;
+  for(i=0; i<regions.length; i++){if(regions[i] > regioncount) {regioncount = regions[i];}} // counts how many regions there are
+  var regionsums = [];
+  for(i=0; i<regioncount; i++){regionsums[i]=0}
+  for(i=0; i<regions.length; i++){regionsums[regions[i]]+=values[i]}
+  for(i=0; i<regionsums.length; i++){
+    var sumregionshtml = "";
   }
 }
 
