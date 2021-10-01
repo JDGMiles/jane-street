@@ -1,0 +1,11 @@
+3N robots, N races
+
+Xj = ways that 3N robots can pick j races = j^3N
+
+Yj = ways that 3N robots can pick N races such that j specific races are empty = X[N-j]
+
+Zj = ways that 3N robots can pick N races such that j races are empty
+
+A = ways that 3N robots can pick N races such that at least 1 race is empty
+
+A = Nc1*Y1 - Nc2*Y2 + Nc3*Y3 - ... +/- Nc(N-1)*Y[N-1] (uses inclusion-exclusion)
