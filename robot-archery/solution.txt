@@ -1,0 +1,181 @@
+Four robots take it in turns to generate a number between 0 and 1 at random. If it is lower than the best score then it becomes the new best score. Otherwise that robot is eliminated. This is repeated, with the same robot order, excluding any eliminated robots, until only one robot is left. Best score is not reset between rounds. The best score begins at 1.
+
+Round 1 ranking possibilities (each equally likely because the robots have the same probability function):
+
+ABCD -> A survives
+ABCD -> A survives
+ACBD -> A survives
+ACDB -> A survives
+ADBC -> A survives
+ADCB -> A survives
+BACD -> AB survive
+BADC -> AB survive
+BCAD -> AB survive
+BCDA -> AB survive
+BDAC -> AB survive
+BDCA -> AB survive
+CABD -> AC survive
+CADB -> AC survive
+CDAB -> AC survive
+DABC -> AD survive
+DACB -> AD survive
+CBAD -> ABC survive
+CBDA -> ABC survive
+CDBA -> ABC survive
+DBAC -> ABD survive
+DBCA -> ABD survive
+DCAB -> ACD survive
+DCBA -> ABCD survive
+
+A 6/24
+B 0/24
+C 0/24
+D 0/24
+AB 6/24
+AC 3/24
+AD 2/24
+ABC 3/24
+ABD 2/24
+ACD 1/24
+ABCD 1/24
+
+
+Round ranking possibilities given best score P:
+
+(notation: uppercase means the robot got lower than the best score, lowercase means it did not.)
+
+
+All robots have lower score than P:
+	-- P^4 chance of this scenario --
+
+ABCD -> A survives
+ABCD -> A survives
+ACBD -> A survives
+ACDB -> A survives
+ADBC -> A survives
+ADCB -> A survives
+BACD -> AB survive
+BADC -> AB survive
+BCAD -> AB survive
+BCDA -> AB survive
+BDAC -> AB survive
+BDCA -> AB survive
+CABD -> AC survive
+CADB -> AC survive
+CDAB -> AC survive
+DABC -> AD survive
+DACB -> AD survive
+CBAD -> ABC survive
+CBDA -> ABC survive
+CDBA -> ABC survive
+DBAC -> ABD survive
+DBCA -> ABD survive
+DCAB -> ACD survive
+DCBA -> ABCD survive
+
+All robots except d have lower score than P:
+	-- (P^3)(1-P) chance of this scenario --
+
+ABC -> A survives
+ACB -> A survives
+BAC -> AB survive
+BCA -> AB survive
+CAB -> AC survive
+CBA -> ABC survive
+
+All robots except c have lower score than P:
+	-- (P^3)(1-P) chance of this scenario -- 
+
+ABD -> A survives
+ADB -> A survives
+BAD -> AB survive
+BDA -> AB survive
+DAB -> AD survive
+DBA -> ABD survive
+
+All robots except b have lower score than P:
+	-- (P^3)(1-P) chance of this scenario --
+
+ACD -> A survives
+ADC -> A survives
+CAD -> AC survive
+CDA -> AC survive
+DAC -> AD survive
+DCA -> ACD survive
+
+All robots except a have lower score than P:
+	-- (P^3)(1-P) chance of this scenario --
+
+BCD -> B survives
+BDC -> B survives
+CBD -> BC survive
+CDB -> BC survive
+DBC -> BD survive
+DCB -> BCD survive
+
+All robots except d and c have lower score than P:
+	-- (P^2)(1-P)^2 chance of this scenario --
+	
+AB -> A survives
+BA -> AB survive
+
+All robots except d and b have lower score than P:
+	-- (P^2)(1-P)^2 chance of this scenario --
+	
+AC -> A survives
+CA -> AC survive
+
+All robots except d and a have lower score than P:
+	-- (P^2)(1-P)^2 chance of this scenario --
+	
+BC -> B survives
+CB -> BC survive
+
+All robots except c and b have lower score than P:
+	-- (P^2)(1-P)^2 chance of this scenario --
+	
+AD -> A survives
+DA -> AD survive
+
+All robots except c and a have lower score than P:
+	-- (P^2)(1-P)^2 chance of this scenario --
+	
+BD -> B survives
+DB -> BD survive
+
+All robots except b and a have lower score than P:
+	-- (P^2)(1-P)^2 chance of this scenario --
+	
+CD -> C survives
+DC -> CD survive
+
+Only A has lower score than P:
+	-- (P)(1-P)^3 chance of this scenario --
+
+A -> A survives
+
+Only B has lower score than P:
+	-- (P)(1-P)^3 chance of this scenario --
+
+B -> B survives
+
+Only C has lower score than P:
+	-- (P)(1-P)^3 chance of this scenario --
+
+C -> C survives
+
+Only D has lower score than P:
+	-- (P)(1-P)^3 chance of this scenario --
+
+D -> D survives
+
+No robots have lower score than P
+	-- (1-P)^4 chance of this scenario --
+	
+D survives
+
+^
+To do: group the survival outcomes and simplify their probabilities
+
+-------------------------------------------------------------
+
