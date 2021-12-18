@@ -179,3 +179,30 @@ To do: group the survival outcomes and simplify their probabilities
 
 -------------------------------------------------------------
 
+#include <iostream>
+#include <math.h>
+#include <string>
+
+using namespace std;
+
+int twoplayer(int ID1, int ID2) {
+	srand(time(NULL));
+	return 0;
+}
+
+int main() {
+/*
+	unsigned long long int Awins = 0;
+	unsigned long long int Bwins = 0;
+	unsigned long long int Cwins = 0;
+	unsigned long long int Dwins = 0;
+	unsigned long long int totalgames = 0;
+
+	unsigned long long int maxsize = 18446744073709551615;
+
+	cout << "A wins: " << Awins << "\nB wins: " << Bwins << "\nC wins: " << Cwins << "\nD wins: " << Dwins;
+
+*/
+
+	return 0;
+}
